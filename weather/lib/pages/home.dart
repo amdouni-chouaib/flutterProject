@@ -173,46 +173,56 @@ class _HomePageState extends State<HomePage> {
   }
 
   // Function to get condition icon based on weather code
- Icon getConditionIcon(int weatherCode) {
-  switch (weatherCode) {
-    case 1000: // Clear
-      return Icon(Icons.wb_sunny);
-    case 1001: // Cloudy
-      return Icon(Icons.cloud);
-    case 1100: // Mostly Clear
-    case 1101: // Partly Cloudy
-    case 1102: // Mostly Cloudy
-      return Icon(Icons.cloud_queue);
-    case 2000: // Fog
-    case 2100: // Light Fog
-      return Icon(Icons.cloud_off);
-    case 3000: // Light Rain
-    case 3001: // Rain
-    case 3002: // Heavy Rain
-      return Icon(Icons.grain);
-    case 4000: // Light Snow
-    case 4001: // Snow
-    case 4002: // Heavy Snow
-      return Icon(Icons.ac_unit);
-    case 5000: // Sleet
-    case 5001: // Freezing Rain
-    case 5002: // Heavy Freezing Rain
-      return Icon(Icons.ac_unit); // Adjust this icon accordingly
-    case 6000: // Light Showers
-    case 6001: // Showers
-    case 6002: // Heavy Showers
-      return Icon(Icons.grain); // Adjust this icon accordingly
-    case 7000: // Thunderstorm
-      return Icon(Icons.flash_on);
-    case 8000: // Light Drizzle
-    case 8001: // Drizzle
-    case 8002: // Heavy Drizzle
-      return Icon(Icons.grain); // Adjust this icon accordingly
-    default:
-      return Icon(Icons.error); // Default icon for unknown weather codes
+  Icon getConditionIcon(int weatherCode) {
+    switch (weatherCode) {
+      case 1000: // Clear
+        return Icon(Icons.wb_sunny);
+      case 1001: // Cloudy
+        return Icon(Icons.cloud);
+      case 1100: // Mostly Clear
+      case 1101: // Partly Cloudy
+      case 1102: // Mostly Cloudy
+        return Icon(Icons.cloud_queue);
+      case 2000: // Fog
+      case 2100: // Light Fog
+        return Icon(Icons.cloud_off);
+      case 3000: // Light Rain
+      case 3001: // Rain
+      case 3002: // Heavy Rain
+        return Icon(Icons.grain);
+      case 4000: // Light Snow
+      case 4001: // Snow
+      case 4002: // Heavy Snow
+        return Icon(Icons.ac_unit);
+      case 5000: // Sleet
+      case 5001: // Freezing Rain
+      case 5002: // Heavy Freezing Rain
+        return Icon(Icons.ac_unit); // Adjust this icon accordingly
+      case 6000: // Light Showers
+      case 6001: // Showers
+      case 6002: // Heavy Showers
+        return Icon(Icons.grain); // Adjust this icon accordingly
+      case 7000: // Thunderstorm
+        return Icon(Icons.flash_on);
+      case 8000: // Light Drizzle
+      case 8001: // Drizzle
+      case 8002: // Heavy Drizzle
+        return Icon(Icons.grain); // Adjust this icon accordingly
+      default:
+        return Icon(Icons.error); // Default icon for unknown weather codes
+    }
   }
-}
 
+  String formatDate(String timestamp) {
+    try {
+      final dateTime = DateTime.parse(timestamp);
+      final formattedDate = "${dateTime.day}/${dateTime.month}/${dateTime.year}";
+      return formattedDate;
+    } catch (e) {
+      print('Error formatting date: $e');
+      return 'Invalid Date';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +266,7 @@ class _HomePageState extends State<HomePage> {
                         child: Column(
                           children: [
                             ListTile(
-                              title: Text('Date: ${dayData['time']}'),
+                              title: Text('Date: ${formatDate(dayData['time'])}'),
                             ),
                             ListTile(
                               leading: Icon(Icons.wb_sunny), // Temperature icon
